@@ -1,1 +1,2 @@
-# stocks
+#Technologies Used
+React, MongoDB, Express
