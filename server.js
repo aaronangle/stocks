@@ -13,7 +13,8 @@ app.use(express.static("public"));
 app.use(data);
 
 app.use("/graphql", graphqlHTTP({
-    schema
+    schema,
+    graphiql: true
 }))
 
 app.get("*", (req, res) => {
