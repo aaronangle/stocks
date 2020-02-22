@@ -6,6 +6,7 @@ const schema = require("./graphqlSchema/schema")
 const PORT = process.env.PORT || 3001;
 const connectToDatabase = require("./config/db");
 
+
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(express.static("public"));
