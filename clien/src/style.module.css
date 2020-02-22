@@ -1,0 +1,15 @@
+.column{
+    width: 100vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+.stockContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    max-width: 100vw !important;
+    overflow-x: hidden;
+    margin-top: 100px;
+}

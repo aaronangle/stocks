@@ -1,0 +1,19 @@
+body {
+  margin: 0;
+  font-family: Camphor,Open Sans,Segoe UI,sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #f6f9fc;
+}
+
+code {
+  font-family: Camphor,Open Sans,Segoe UI,sans-serif;
+}
+h4{
+  color: white;
+  text-align: center;
+}
+#myChart{
+  height: 600px;
+  width: 600px;
+}
