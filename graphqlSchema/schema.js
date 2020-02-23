@@ -11,7 +11,8 @@ const PriceType = new GraphQLObjectType({
         c: { type: GraphQLFloat },
         h: { type: GraphQLFloat },
         l: { type: GraphQLFloat },
-        o: { type: GraphQLFloat }
+        o: { type: GraphQLFloat },
+        pc: { type: GraphQLFloat }
     })
 });
 
@@ -53,6 +54,30 @@ const NameType = new GraphQLObjectType({
     })
 });
 
+const CompanyInformationType = new GraphQLObjectType({
+    name: "CompanyInfo",
+    fields: () => ({
+        address: { type: GraphQLString },
+        city: { type: GraphQLString },
+        country: { type: GraphQLString },
+        currency: { type: GraphQLString },
+        cusip: { type: GraphQLString },
+        description: { type: GraphQLString },
+        exchange: { type: GraphQLString },
+        ggroup: { type: GraphQLString },
+        gind: { type: GraphQLString },
+        gsector: { type: GraphQLString },
+        gsubind: { type: GraphQLString },
+        ipo: { type: GraphQLString },
+        isin: { type: GraphQLString },
+        naics: { type: GraphQLString },
+        name: { type: GraphQLString },
+        phone: { type: GraphQLString },
+        state: { type: GraphQLString },
+        ipo: { type: GraphQLString },
+        weburl: { type: GraphQLString },
+    })
+})
 const RootQuery = new GraphQLObjectType({
     name: "RootQueryType",
     fields: {
@@ -87,6 +112,16 @@ const RootQuery = new GraphQLObjectType({
                     .then(res => res.data)
             }
         },
+        companyInformation: {
+            type: CompanyInformationType,
+            args: {
+                name: { type: GraphQLString }
+            },
+            resolve(parent, args) {
+                return axios.get(`https://finnhub.io/api/v1/stock/profile?symbol=${args.name}&token=${process.env.SECRET_KEY}`)
+                    .then(res => res.data)
+            }
+        },
         symbols: {
             type: new GraphQLList(SymbolsType),
             resolve(parent, args) {
@@ -94,8 +129,25 @@ const RootQuery = new GraphQLObjectType({
             }
         }
     }
+});
+
+const Mutation = new GraphQLObjectType({
+    name: "Mutation",
+    fields: {
+        addSymbol: {
+            type: NameType,
+            args: {
+                name: { type: GraphQLString }
+            },
+            async resolve(parent, args) {
+                return await Symbols.updateOne({ $push: { symbol: { "name": args.name } } });
+            }
+        }
+    }
 })
 
+
 module.exports = new GraphQLSchema({
-    query: RootQuery
+    query: RootQuery,
+    mutation: Mutation
 })

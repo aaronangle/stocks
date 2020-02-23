@@ -26,17 +26,17 @@ const Card = (props) => {
         }
     }
 
-    //     axios.get(`/api/basicinfo/${name}`)
-    //         .then(res => {
-    //             const { o, h, l, c } = res.data.data
-    //             setState(prevState => ({
-    //                 ...prevState,
-    //                 open: o,
-    //                 high: h,
-    //                 low: l,
-    //                 current: c
-    //             }))
-    //         })
+    axios.get(`/api/basicinfo/${name}`)
+        .then(res => {
+            const { o, h, l, c } = res.data.data
+            setState(prevState => ({
+                ...prevState,
+                open: o,
+                high: h,
+                low: l,
+                current: c
+            }))
+        })
 
     const { open, high, low, current } = state;
     return (

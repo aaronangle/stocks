@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from "./components/Navbar/Navbar";
 import Card from "./components/Card/Card"
 import styles from "./style.module.css";
@@ -12,10 +12,17 @@ function App() {
   const [symbols, setSymbols] = useState([]);
   const [modalShowing, setModalShowing] = useState(false);
 
-  axios.get("/api/symbols")
-    .then(res => {
-      setSymbols(res.data[0].symbol)
-    })
+  useEffect(() => {
+    let incomingSymbols = [];
+    axios.get("/api/symbols")
+      .then(res => {
+        res.data[0].symbol.forEach(element => {
+          incomingSymbols.push(element.name)
+        })
+        console.log(incomingSymbols)
+        setSymbols(incomingSymbols)
+      })
+  }, [])
 
 
   return (

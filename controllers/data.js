@@ -1,8 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const axios = require("axios");
-const Symbols = require("../model/symbols")
-const allSymbols = require("../model/symbols")
+const Symbols = require("../model/symbols");
 
 router.get("/api/basicinfo/:symbol", function (req, res) {
     const { symbol } = req.params;
