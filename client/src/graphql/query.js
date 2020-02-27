@@ -1,7 +1,7 @@
 import gql from "graphql-tag";
 
 const GET_QUOTE = gql`
-    query GetQuote{
+    query GetQuote($name: String!){
         quote(name: $name){
             c
             h
@@ -12,7 +12,7 @@ const GET_QUOTE = gql`
 `;
 
 const GET_RECOMMENDATION = gql`
-    query GetRecommendation{
+    query GetRecommendation($name: String!){
         recommendation(name: $name){
             buy
             hold
@@ -26,7 +26,7 @@ const GET_RECOMMENDATION = gql`
 `;
 
 const GET_EARNINGS = gql`
-    query GetEarnings{
+    query GetEarnings($name: String!){
         earnings(name: $name){
             actual
             estimate
@@ -45,8 +45,8 @@ const GET_SYMBOLS = gql`
 `;
 
 const GET_COMPANYINFO = gql`
-    query GetCompanyInfo{
-        companyInformation{
+    query GetCompanyInfo($name: String!){
+        companyInformation(name: $name){
             address
             city
             country
