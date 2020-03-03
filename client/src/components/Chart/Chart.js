@@ -1,29 +1,33 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import axios from "axios";
 import Chart from "chart.js";
-import styles from "./style.module.css"
+import styles from "./style.module.css";
+import { useQuery } from '@apollo/react-hooks';
+import { GET_EARNINGS } from "../../graphql/query";
+
 const StockChart = (props) => {
     const { name } = props;
     const chartRef = React.createRef();
 
-    useEffect(() => {
-        let earningsData;
+    const { loading, error, data } = useQuery(GET_EARNINGS, { variables: { name } });
+
+    if (loading) return '';
+    if (error) return `Error! ${error.message}`;
+    (async function waitToSet() {
         let actualEarning = [];
         let estimateEarning = [];
         let period = [];
 
-        axios.get(`/api/earnings/${name}`)
-            .then(async response => {
-                earningsData = response.data.data
-                await earningsData.forEach(element => {
-                    actualEarning.push(element.actual)
-                    estimateEarning.push(element.estimate)
-                    period.push(element.period)
-                })
-                await setChart();
-            })
-        const myChartRef = chartRef.current.getContext("2d");
+        await data.earnings.splice(0, 8).forEach(element => {
+            actualEarning.push(element.actual);
+            estimateEarning.push(element.estimate);
+            period.push(element.period)
+        })
+
+        await setChart();
+
         function setChart() {
+            const myChartRef = chartRef.current.getContext("2d");
             new Chart(myChartRef, {
                 type: "bar",
                 data: {
@@ -37,7 +41,7 @@ const StockChart = (props) => {
                         {
                             label: "Actual Earnings Per Share",
                             data: [...actualEarning],
-                            backgroundColor: ["#3297d3", "#3297d3", "#3297d3", "#3297d3", "#3297d3", "#3297d3", "#3297d3",]
+                            backgroundColor: ["#3297d3", "#3297d3", "#3297d3", "#3297d3", "#3297d3", "#3297d3", "#3297d3", "#3297d3"]
                         }
                     ]
                 },
@@ -59,7 +63,7 @@ const StockChart = (props) => {
                 }
             })
         }
-    }, [])
+    })();
 
     return (
         <div className={styles.chart}>

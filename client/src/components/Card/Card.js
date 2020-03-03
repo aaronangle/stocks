@@ -1,22 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styles from "./style.module.css";
-import Modal from "../Modal/Modal"
-import axios from "axios"
-
-// r = requests.get('https://finnhub.io/api/v1/quote?symbol=AAPL&token=bogh4o7rh5rej5i71mg0') quote
-// r = requests.get('https://finnhub.io/api/v1/scan/pattern?symbol=AAPL&resolution=D&token=bogh4o7rh5rej5i71mg0') pattern recognition
-// r = requests.get('https://finnhub.io/api/v1/scan/support-resistance?symbol=IBM&resolution=D&token=bogh4o7rh5rej5i71mg0') support resistance
-// r = requests.get('https://finnhub.io/api/v1/calendar/ipo?token=bogh4o7rh5rej5i71mg0') ipo calendar
-// bogh4o7rh5rej5i71mg0
+import Modal from "../Modal/Modal";
+import { useQuery } from '@apollo/react-hooks';
+import { GET_QUOTE } from "../../graphql/query";
 
 const Card = (props) => {
     const [show, changeShow] = useState(false);
-    const [state, setState] = useState({
-        open: "",
-        high: "",
-        low: "",
-        current: ""
-    })
     const { name, setModalShowing, modalShowing } = props;
 
     function showModal() {
@@ -26,19 +15,16 @@ const Card = (props) => {
         }
     }
 
-    axios.get(`/api/basicinfo/${name}`)
-        .then(res => {
-            const { o, h, l, c } = res.data.data
-            setState(prevState => ({
-                ...prevState,
-                open: o,
-                high: h,
-                low: l,
-                current: c
-            }))
-        })
+    const { loading, error, data } = useQuery(GET_QUOTE, { variables: { name } });
 
-    const { open, high, low, current } = state;
+    if (loading) return 'Loading...';
+    if (error) return `Error! ${error.message}`;
+    const { o, h, l, c } = data.quote;
+    const open = o;
+    const high = h;
+    const low = l;
+    const current = c;
+
     return (
         <div className={styles.card}>
             <div onClick={() => showModal()} className={styles.innerCard}>

@@ -1,44 +1,26 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import styles from "./style.module.css";
-import axios from "axios";
 import StockChart from "../Chart/Chart"
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
+import { useQuery } from '@apollo/react-hooks';
+import { GET_RECOMMENDATION } from "../../graphql/query";
 import 'react-circular-progressbar/dist/styles.css';
 
 const Modal = (props) => {
     const { name, changeShow, setModalShowing } = props;
-    const [state, setState] = useState({
-        buy: "",
-        sell: "",
-        hold: "",
-        strongBuy: "",
-        strongSell: ""
-    })
 
-    useEffect(() => {
-        axios(`/api/trends/${name}`)
-            .then(res => {
-                const { buy, sell, hold, strongBuy, strongSell } = res.data.data[0];
-                setState(prevState => ({
-                    ...prevState,
-                    buy,
-                    sell,
-                    hold,
-                    strongBuy,
-                    strongSell
-                }))
-            })
-            .catch(err => {
-                console.log(err)
-            })
-    }, [])
+    const { loading, error, data } = useQuery(GET_RECOMMENDATION, { variables: { name } });
+
+    if (loading) return '';
+    if (error) return `Error! ${error.message}`;
+    const { buy, sell, hold, strongBuy, strongSell } = data.recommendation[0];
+
 
     function closeModal() {
         setModalShowing(false);
         changeShow(false);
     }
 
-    const { buy, sell, hold, strongBuy, strongSell } = state;
     const indicators = [
         {
             value: buy,

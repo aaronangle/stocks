@@ -39,7 +39,9 @@ const GET_EARNINGS = gql`
 const GET_SYMBOLS = gql`
     query GetSymbols{
         symbols{
-            symbol
+            symbol{
+                name
+            }
         }
     }
 `;

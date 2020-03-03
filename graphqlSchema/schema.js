@@ -87,7 +87,6 @@ const RootQuery = new GraphQLObjectType({
                 name: { type: GraphQLString }
             },
             resolve(parent, args) {
-                console.log(args)
                 return axios.get(`https://finnhub.io/api/v1/quote?symbol=${args.name}&token=${process.env.SECRET_KEY}`)
                     .then(res => res.data)
             }

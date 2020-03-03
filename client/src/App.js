@@ -6,12 +6,7 @@ import { ApolloProvider } from '@apollo/react-hooks';
 function App() {
   const client = new ApolloClient({
     uri: 'http://localhost:3001/graphql',
-    fetchOptions: {
-      mode: 'no-cors',
-    }
   })
-
-
 
   return (
     <ApolloProvider client={client}>
