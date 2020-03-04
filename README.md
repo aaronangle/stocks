@@ -1,3 +1,7 @@
+# Stocks
+
+Data visualization for any stocks that you want to see.
+
 # Technologies Used
 
 * React
@@ -7,3 +11,7 @@
 * GraphQL
 * ReactApollo
 * Finnhub API
+
+
+![HomePage](./assets/Capture.PNG)
+![Modal](./assets/Capture2.PNG)

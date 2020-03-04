@@ -27,10 +27,10 @@ const Card = (props) => {
     );
     if (error) return `Error! ${error.message}`;
     const { o, h, l, c } = data.quote;
-    const open = o;
-    const high = h;
-    const low = l;
-    const current = c;
+    const open = o.toFixed(2);
+    const high = h.toFixed(2);
+    const low = l.toFixed(2);
+    const current = c.toFixed(2);
 
     return (
         <div className={styles.card}>
