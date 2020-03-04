@@ -1,9 +1,25 @@
 .chart{
     width: 600px;
     height: 600px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
 }
 .loading{
     display: flex;
     justify-content: center;
     align-items: center;
+}
+.button{
+    border: none;
+    color: white;
+    background-color:#5533ff;
+    border-radius: 10px;
+    padding: 10px;
+    font-size: 20px;
+}
+.button:hover{
+    cursor: pointer;
+    background-color:#7357ff;
 }

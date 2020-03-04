@@ -1,9 +1,10 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Chart from "chart.js";
 import styles from "./style.module.css";
 import { useQuery } from '@apollo/react-hooks';
 import { GET_EARNINGS } from "../../graphql/query";
 import LoadingSpinner from "../../utititlyComponents/LoadingSpinner/LoadingSpinner";
+import { Link } from "react-router-dom";
 
 const StockChart = (props) => {
     const { name } = props;
@@ -78,6 +79,10 @@ const StockChart = (props) => {
     return (
         <div className={styles.chart}>
             <canvas id="myChart" ref={chartRef} />
+            <Link to={`/information/${name}`}>
+                <button className={styles.button}>Learn More</button>
+            </Link>
+            <div></div>
         </div>
     )
 }

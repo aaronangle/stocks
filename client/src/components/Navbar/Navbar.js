@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import styles from "./style.module.css";
 import { ADD_SYMBOL, GET_SYMBOLS } from "../../graphql/query";
 import { useMutation } from '@apollo/react-hooks';
+import { Link } from "react-router-dom";
 
-const Navbar = () => {
+const Navbar = (props) => {
+    const { show } = props;
     const [input, setInput] = useState("");
-    const [name, { data }] = useMutation(ADD_SYMBOL);
+    const [name] = useMutation(ADD_SYMBOL);
     function addSymbol() {
         if (input !== "") {
             name({
@@ -21,11 +23,18 @@ const Navbar = () => {
 
     return (
         <div className={styles.navbar}>
-            <h2 className={styles.title}>Stock</h2>
-            <div className={styles.search}>
-                <input className={styles.input} placeholder="Add A Stock Symbol" value={input} onChange={(e) => setInput(e.target.value)}></input>
-                <h1 className={styles.add} onClick={addSymbol}>+</h1>
-            </div>
+            <Link to={"/"} style={{ textDecoration: 'none' }}>
+                <h2 className={styles.title}>Stock</h2>
+            </Link>
+            {show ?
+                <div className={styles.search}>
+                    <input className={styles.input} placeholder="Add A Stock Symbol" value={input} onChange={(e) => setInput(e.target.value)}></input>
+                    <h1 className={styles.add} onClick={addSymbol}>+</h1>
+                </div>
+                : <div className={styles.search} style={{ visibility: 'hidden' }}>
+                    <input className={styles.input} placeholder="Add A Stock Symbol" value={input} onChange={(e) => setInput(e.target.value)}></input>
+                    <h1 className={styles.add} onClick={addSymbol}>+</h1>
+                </div>}
         </div>
     )
 }

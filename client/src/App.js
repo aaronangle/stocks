@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import Home from "./pages/Home"
+import React from 'react';
+import Home from "./pages/Home";
+import CompanyInformation from "./pages/CompanyInformation/CompanyInformation";
 import ApolloClient from "apollo-boost";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { ApolloProvider } from '@apollo/react-hooks';
 
 function App() {
@@ -10,7 +12,12 @@ function App() {
 
   return (
     <ApolloProvider client={client}>
-      <Home />
+      <Router>
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route exact path="/information/:name" component={CompanyInformation} />
+        </Switch>
+      </Router>
     </ApolloProvider>
   )
 

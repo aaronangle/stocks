@@ -62,12 +62,29 @@ const GET_COMPANYINFO = gql`
             gsubind
             ipo
             isin
-            naic
+            naics
             name
             phone
             state
             ipo
             weburl
+            employeeTotal
+        }
+    }
+`;
+
+const GET_COMPANY_NEWS = gql`
+    query GetCompanyNews($name: String!){
+        companyNews(name: $name){
+            category
+            datetime
+            headline
+            id
+            image
+            related
+            source
+            summary
+            url
         }
     }
 `;
@@ -86,5 +103,6 @@ export {
     GET_SYMBOLS,
     GET_EARNINGS,
     GET_COMPANYINFO,
+    GET_COMPANY_NEWS,
     ADD_SYMBOL
 }

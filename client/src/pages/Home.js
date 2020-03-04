@@ -11,7 +11,11 @@ const Home = (props) => {
 
     const { loading, error, data } = useQuery(GET_SYMBOLS);
 
-    if (loading) return <LoadingSpinner />;
+    if (loading) return (
+        <div className={styles.loadingContainer}>
+            <LoadingSpinner />
+        </div>
+    );
     if (error) return `Error! ${error.message}`;
     const symbolNames = [];
     data.symbols[0].symbol.forEach(element => {
@@ -20,7 +24,7 @@ const Home = (props) => {
 
     return (
         <div>
-            <Navbar />
+            <Navbar show={true} />
             <div className={styles.stockContainer}>
                 {data.symbols[0].symbol.map((element, index) => {
                     return <Card name={element.name} modalShowing={modalShowing} setModalShowing={setModalShowing} key={index} />
