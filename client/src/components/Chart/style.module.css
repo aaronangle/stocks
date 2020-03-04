@@ -2,3 +2,8 @@
     width: 600px;
     height: 600px;
 }
+.loading{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

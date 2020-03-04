@@ -73,10 +73,10 @@ const GET_COMPANYINFO = gql`
 `;
 
 const ADD_SYMBOL = gql`
-mutation AddSymbols{
-    name{
-        symbol
-    }
+mutation AddSymbols($name: String!){
+    addSymbol(name: $name){
+            name
+}
 }
 `;
 

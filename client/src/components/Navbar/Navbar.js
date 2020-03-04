@@ -1,16 +1,19 @@
 import React, { useState } from "react";
 import styles from "./style.module.css";
-import axios from "axios";
+import { ADD_SYMBOL, GET_SYMBOLS } from "../../graphql/query";
+import { useMutation } from '@apollo/react-hooks';
 
 const Navbar = () => {
     const [input, setInput] = useState("");
-
+    const [name, { data }] = useMutation(ADD_SYMBOL);
     function addSymbol() {
         if (input !== "") {
-            axios.post("/api/add", {
-                symbol: input
+            name({
+                variables: { name: input.toUpperCase() },
+                refetchQueries: [{ query: GET_SYMBOLS }]
             })
                 .then(res => {
+                    console.log(res)
                 })
         }
         setInput("")

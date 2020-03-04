@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
-import axios from "axios";
 import Chart from "chart.js";
 import styles from "./style.module.css";
 import { useQuery } from '@apollo/react-hooks';
 import { GET_EARNINGS } from "../../graphql/query";
+import LoadingSpinner from "../../utititlyComponents/LoadingSpinner/LoadingSpinner";
 
 const StockChart = (props) => {
     const { name } = props;
@@ -11,16 +11,26 @@ const StockChart = (props) => {
 
     const { loading, error, data } = useQuery(GET_EARNINGS, { variables: { name } });
 
-    if (loading) return '';
+    if (loading) return (
+        <div className={styles.chart}>
+            <div className={styles.loading}>
+                <LoadingSpinner />
+            </div>
+        </div>
+    );
     if (error) return `Error! ${error.message}`;
     (async function waitToSet() {
         let actualEarning = [];
         let estimateEarning = [];
+        let firstColor = [];
+        let secondColor = [];
         let period = [];
 
         await data.earnings.splice(0, 8).forEach(element => {
             actualEarning.push(element.actual);
             estimateEarning.push(element.estimate);
+            firstColor.push("#5533ff");
+            secondColor.push("#3297d3")
             period.push(element.period)
         })
 
@@ -36,12 +46,12 @@ const StockChart = (props) => {
                         {
                             label: "Estimated Earnings Per Share",
                             data: [...estimateEarning],
-                            backgroundColor: ["#5533ff", "#5533ff", "#5533ff", "#5533ff", "#5533ff", "#5533ff", "#5533ff", "#5533ff"]
+                            backgroundColor: firstColor
                         },
                         {
                             label: "Actual Earnings Per Share",
                             data: [...actualEarning],
-                            backgroundColor: ["#3297d3", "#3297d3", "#3297d3", "#3297d3", "#3297d3", "#3297d3", "#3297d3", "#3297d3"]
+                            backgroundColor: secondColor
                         }
                     ]
                 },

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styles from "./style.module.css";
 import Modal from "../Modal/Modal";
+import LoadingSpinner from "../../utititlyComponents/LoadingSpinner/LoadingSpinner";
 import { useQuery } from '@apollo/react-hooks';
 import { GET_QUOTE } from "../../graphql/query";
 
@@ -17,7 +18,13 @@ const Card = (props) => {
 
     const { loading, error, data } = useQuery(GET_QUOTE, { variables: { name } });
 
-    if (loading) return 'Loading...';
+    if (loading) return (
+        <div className={styles.card}>
+            <div className={styles.loadingCard}>
+                <LoadingSpinner />
+            </div>
+        </div>
+    );
     if (error) return `Error! ${error.message}`;
     const { o, h, l, c } = data.quote;
     const open = o;

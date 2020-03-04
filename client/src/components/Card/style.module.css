@@ -7,6 +7,12 @@
     animation: move .3s linear;
     padding: 10px;
 }
+.loadingCard{
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    height: 270px;
+}
 .innerCard{
     height: 100%;
 }

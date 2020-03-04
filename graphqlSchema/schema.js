@@ -75,7 +75,7 @@ const CompanyInformationType = new GraphQLObjectType({
         phone: { type: GraphQLString },
         state: { type: GraphQLString },
         ipo: { type: GraphQLString },
-        weburl: { type: GraphQLString },
+        weburl: { type: GraphQLString }
     })
 })
 const RootQuery = new GraphQLObjectType({
@@ -139,7 +139,8 @@ const Mutation = new GraphQLObjectType({
                 name: { type: GraphQLString }
             },
             async resolve(parent, args) {
-                return await Symbols.updateOne({ $push: { symbol: { "name": args.name } } });
+                await Symbols.updateOne({ $push: { symbol: { "name": args.name } } });
+                return args.name
             }
         }
     }
