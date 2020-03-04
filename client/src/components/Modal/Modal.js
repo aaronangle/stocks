@@ -5,13 +5,18 @@ import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import { useQuery } from '@apollo/react-hooks';
 import { GET_RECOMMENDATION } from "../../graphql/query";
 import 'react-circular-progressbar/dist/styles.css';
+import LoadingSpinner from "../../utititlyComponents/LoadingSpinner/LoadingSpinner";
 
 const Modal = (props) => {
     const { name, changeShow, setModalShowing } = props;
 
     const { loading, error, data } = useQuery(GET_RECOMMENDATION, { variables: { name } });
 
-    if (loading) return '';
+    if (loading) return (
+        <div className={styles.loading}>
+            <LoadingSpinner />
+        </div>
+    );
     if (error) return `Error! ${error.message}`;
     const { buy, sell, hold, strongBuy, strongSell } = data.recommendation[0];
 

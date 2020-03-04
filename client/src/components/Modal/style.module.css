@@ -10,6 +10,12 @@
    box-shadow: 1px 100px 100px 1000px rgba(0, 0, 0, 0.404);
    border-radius: 10px;
 }
+.loading{
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translate(50%, 50%);
+}
 .header{
     display: flex;
     flex-direction: row;
