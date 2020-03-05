@@ -22,6 +22,25 @@ const CompanyInformation = (props) => {
         <div>
             <Navbar show={false} />
             <div className={styles.container}>
+                <div className={styles.header}>
+                    <h1>{name.toUpperCase()}</h1>
+                    <h4 className={styles.h4}>{address} {city}, {state} {country}</h4>
+                </div>
+                <div className={styles.information}>
+                    <div className={styles.stockInfo}>
+                        <p>IPO: {ipo}</p>
+                        <p>Exchange: {exchange}</p>
+                        <p>Group: {ggroup}</p>
+                        <p>Industry: {naics}</p>
+                        <p>Total Employees: {employeeTotal}</p>
+                    </div>
+                    <div className={styles.compInfo}>
+                        <p>{description}</p>
+                        <a href={weburl}>
+                            <button href={weburl} className={styles.button}> Company Site</button>
+                        </a>
+                    </div>
+                </div>
                 <CompanyNews name={companyName} />
             </div>
         </div>

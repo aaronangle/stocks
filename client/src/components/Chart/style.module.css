@@ -14,12 +14,12 @@
 .button{
     border: none;
     color: white;
-    background-color:#5533ff;
+    background-color:#3e87f2;
     border-radius: 10px;
     padding: 10px;
     font-size: 20px;
 }
 .button:hover{
     cursor: pointer;
-    background-color:#7357ff;
+    background-color:#5791e9;
 }

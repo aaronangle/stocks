@@ -10,10 +10,13 @@ import CompanyNewsCard from "../CompanyNewsCard/CompanyNewsCard";
 const CompanyNews = (props) => {
     const { name } = props;
     const { loading, error, data } = useQuery(GET_COMPANY_NEWS, { variables: { name } });
-    if (loading) return <LoadingSpinner />
+    if (loading) return (
+        <div className={styles.loadingContainer}>
+            <LoadingSpinner />
+        </div>
+    )
     if (error) return `Error! ${error.message}`;
     const { companyNews } = data;
-    console.log(companyNews)
     const responsive = {
         desktop: {
             breakpoint: { max: 3000, min: 1224 },
@@ -33,13 +36,14 @@ const CompanyNews = (props) => {
     };
     return (
         <div>
-            <h1>Company News</h1>
+            <h2>Company News</h2>
             <div>
                 <Carousel
                     responsive={responsive}
                     swipeable={false}
                     draggable={false}
                     showDots={true}
+                    renderDotsOutside={false}
                     responsive={responsive}
                     infinite={true}
                     keyBoardControl={true}
