@@ -13,6 +13,9 @@ h4{
   color: white;
   text-align: center;
 }
+h5{
+  margin: 0;
+}
 #myChart{
   height: 600px;
   width: 600px;

@@ -164,9 +164,29 @@ const RootQuery = new GraphQLObjectType({
         },
         generalNews: {
             type: new GraphQLList(GeneralNews),
-
             resolve(parent, args) {
                 return axios.get(`https://finnhub.io/api/v1/news?category=general&token=${process.env.SECRET_KEY}`)
+                    .then(res => res.data)
+            }
+        },
+        forexNews: {
+            type: new GraphQLList(GeneralNews),
+            resolve(parent, args) {
+                return axios.get(`https://finnhub.io/api/v1/news?category=forex&token=${process.env.SECRET_KEY}`)
+                    .then(res => res.data)
+            }
+        },
+        mergerNews: {
+            type: new GraphQLList(GeneralNews),
+            resolve(parent, args) {
+                return axios.get(`https://finnhub.io/api/v1/news?category=merger&token=${process.env.SECRET_KEY}`)
+                    .then(res => res.data)
+            }
+        },
+        cryptoNews: {
+            type: new GraphQLList(GeneralNews),
+            resolve(parent, args) {
+                return axios.get(`https://finnhub.io/api/v1/news?category=crypto&token=${process.env.SECRET_KEY}`)
                     .then(res => res.data)
             }
         },

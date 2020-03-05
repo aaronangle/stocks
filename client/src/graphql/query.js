@@ -102,6 +102,39 @@ const GET_GENERAL_NEWS = gql`
             summary
             url
         }
+        forexNews{
+            category
+            datetime
+            headline
+            id
+            image
+            related
+            source
+            summary
+            url
+        }
+        cryptoNews{
+            category
+            datetime
+            headline
+            id
+            image
+            related
+            source
+            summary
+            url
+        }
+        mergerNews{
+            category
+            datetime
+            headline
+            id
+            image
+            related
+            source
+            summary
+            url
+        }
     }
 `;
 

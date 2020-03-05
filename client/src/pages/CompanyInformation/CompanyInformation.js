@@ -37,7 +37,7 @@ const CompanyInformation = (props) => {
                     </div>
                     <div className={styles.compInfo}>
                         <p>{description}</p>
-                        <a href={weburl}>
+                        <a href={weburl} target="_blank">
                             <button href={weburl} className={styles.button}> Company Site</button>
                         </a>
                     </div>
