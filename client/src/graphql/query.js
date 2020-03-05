@@ -89,6 +89,22 @@ const GET_COMPANY_NEWS = gql`
     }
 `;
 
+const GET_GENERAL_NEWS = gql`
+    query GetGeneralNews{
+        generalNews{
+            category
+            datetime
+            headline
+            id
+            image
+            related
+            source
+            summary
+            url
+        }
+    }
+`;
+
 const ADD_SYMBOL = gql`
 mutation AddSymbols($name: String!){
     addSymbol(name: $name){
@@ -104,5 +120,6 @@ export {
     GET_EARNINGS,
     GET_COMPANYINFO,
     GET_COMPANY_NEWS,
+    GET_GENERAL_NEWS,
     ADD_SYMBOL
 }

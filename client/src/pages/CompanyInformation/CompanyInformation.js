@@ -5,6 +5,7 @@ import { GET_COMPANYINFO } from "../../graphql/query";
 import LoadingSpinner from "../../utititlyComponents/LoadingSpinner/LoadingSpinner";
 import styles from "./style.module.css";
 import CompanyNews from "../../components/CompanyNews/CompanyNews";
+import moment from "moment";
 
 const CompanyInformation = (props) => {
     const companyName = props.match.params.name;
@@ -28,11 +29,11 @@ const CompanyInformation = (props) => {
                 </div>
                 <div className={styles.information}>
                     <div className={styles.stockInfo}>
-                        <p>IPO: {ipo}</p>
-                        <p>Exchange: {exchange}</p>
-                        <p>Group: {ggroup}</p>
-                        <p>Industry: {naics}</p>
-                        <p>Total Employees: {employeeTotal}</p>
+                        <p><span className={styles.lead}>Initial Public Offering:</span> {moment(ipo).format("MMM Do YYYY")}</p>
+                        <p><span className={styles.lead}>Stock Exchange:</span> {exchange}</p>
+                        <p><span className={styles.lead}>Group:</span> {ggroup}</p>
+                        <p><span className={styles.lead}>Industry:</span> {naics}</p>
+                        <p><span className={styles.lead}>Total Employees:</span> {employeeTotal}</p>
                     </div>
                     <div className={styles.compInfo}>
                         <p>{description}</p>

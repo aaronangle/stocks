@@ -1,7 +1,6 @@
 .card{
     min-width: 250px;
     height: 270px;
-    position: relative;
     background-color: white;
     border-radius: 10px;
     margin: 10px;
@@ -25,7 +24,6 @@
 .header{
     display: flex;
     justify-content: center;
-    /* background-color: black; */
     color:#3297d3;
     margin: 0;
 }

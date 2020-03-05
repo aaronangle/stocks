@@ -84,9 +84,24 @@ const CompanyNews = new GraphQLObjectType({
     name: "CompanyNews",
     fields: () => ({
         category: { type: GraphQLString },
-        datetime: { type: GraphQLString },
+        datetime: { type: GraphQLInt },
         headline: { type: GraphQLString },
-        id: { type: GraphQLString },
+        id: { type: GraphQLInt },
+        image: { type: GraphQLString },
+        related: { type: GraphQLString },
+        source: { type: GraphQLString },
+        summary: { type: GraphQLString },
+        url: { type: GraphQLString }
+    })
+})
+
+const GeneralNews = new GraphQLObjectType({
+    name: "GeneralNews",
+    fields: () => ({
+        category: { type: GraphQLString },
+        datetime: { type: GraphQLInt },
+        headline: { type: GraphQLString },
+        id: { type: GraphQLInt },
         image: { type: GraphQLString },
         related: { type: GraphQLString },
         source: { type: GraphQLString },
@@ -144,6 +159,14 @@ const RootQuery = new GraphQLObjectType({
             },
             resolve(parent, args) {
                 return axios.get(`https://finnhub.io/api/v1/news/${args.name}?token=${process.env.SECRET_KEY}`)
+                    .then(res => res.data)
+            }
+        },
+        generalNews: {
+            type: new GraphQLList(GeneralNews),
+
+            resolve(parent, args) {
+                return axios.get(`https://finnhub.io/api/v1/news?category=general&token=${process.env.SECRET_KEY}`)
                     .then(res => res.data)
             }
         },

@@ -1,7 +1,7 @@
 .navbar{
     background-image: linear-gradient(90deg,#5533ff,#2ad1e6);
     width: 100%;
-    height: 100px;
+    max-height: 100px;
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -29,4 +29,45 @@
 }
 .add:hover{
     cursor: pointer;
+}
+.titleWrapper{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: flex-end;
+    width: 15em;
+    position: absolute;
+}
+.circle{
+    border: solid 2px white;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.triangle{
+  width: 0; 
+  height: 0; 
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid white;
+}
+.circle:hover{
+    cursor: pointer;
+}
+.dropDown{
+    width: 18%;
+    background-color: black;
+    position: absolute;
+    top: 70px;
+    height: auto;
+    padding: 10px 25px;
+    border-radius: 0 0 10px 10px;
+}
+.dropContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
